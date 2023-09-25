@@ -6,8 +6,6 @@ import (
 	"strconv"
 
 	"github.com/nacos-cli/ncli/svc"
-	"github.com/spf13/viper"
-
 	"github.com/spf13/cobra"
 )
 
@@ -75,7 +73,6 @@ func init() {
 	parseServerFlag(nsCmd)
 	parseLoginFlag(nsCmd)
 	parseNamespaceFlag(nsCmd)
-	viper.BindPFlags(nsCmd.Flags())
 
 	nsAddCmd.PersistentFlags().StringVarP(&FNamespaceName, "name", "N", "", "namespace name")
 	nsAddCmd.PersistentFlags().StringVarP(&FNamespaceDesc, "desc", "D", "", "namespace description")

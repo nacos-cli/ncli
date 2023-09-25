@@ -5,7 +5,6 @@ import (
 
 	"github.com/nacos-cli/ncli/svc"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 const (
@@ -76,31 +75,6 @@ func RootExecute() {
 	if err != nil {
 		_, _ = os.Stderr.WriteString("Failed, caused by:" + err.Error())
 		os.Exit(1)
-	}
-
-}
-
-func init() {
-
-	cobra.OnInitialize(initConfig)
-	rootCmd.PersistentFlags().StringVarP(&FIniFile, "rc", "r", "", "config file (default is $HOME/.ncli.yaml)")
-
-}
-
-func initConfig() {
-
-	if FIniFile != "" {
-		viper.SetConfigFile(FIniFile)
-	} else {
-		viper.AddConfigPath(os.Getenv("HOME"))
-		viper.AddConfigPath(".")
-		viper.SetConfigName(".ncli.yaml")
-		viper.SetConfigType("yaml")
-	}
-
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic(err)
 	}
 
 }

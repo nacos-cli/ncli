@@ -1,6 +1,0 @@
-schema: http
-port: 8848
-context: /nacos
-host: 127.0.0.1
-username: nacos
-password: nacos
