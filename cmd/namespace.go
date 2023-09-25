@@ -11,8 +11,8 @@ import (
 
 var nsCmd = &cobra.Command{
 	Use:   "namespace",
-	Short: "manage Nacos namespace",
-	Long:  `add/update Nacos namespace.`,
+	Short: "manage namespace",
+	Long:  `manage Nacos namespace.`,
 }
 
 var FNamespaceName string
@@ -29,13 +29,13 @@ var nsAddCmd = &cobra.Command{
 
 		login, err := svc.Login(GServer, GLogin)
 		if err != nil {
-			os.Stderr.WriteString("Login failed, " + err.Error())
+			_, _ = os.Stderr.WriteString("Login failed, " + err.Error())
 			return
 		}
 
 		_, err = svc.NsCreate(login, FNamespaceId, FNamespaceName, FNamespaceDesc)
 		if err != nil {
-			os.Stderr.WriteString("Create namespace failed, " + err.Error())
+			_, _ = os.Stderr.WriteString("Create namespace failed, " + err.Error())
 			return
 		}
 		fmt.Printf("Namespace '%s' created/exists\n", FNamespaceId)
@@ -45,8 +45,8 @@ var nsAddCmd = &cobra.Command{
 
 var nsExistCmd = &cobra.Command{
 	Use:   "exist",
-	Short: "check if Nacos namespace exist",
-	Long:  `check Nacos namespace.`,
+	Short: "check namespace",
+	Long:  `check Nacos namespace for existence.`,
 
 	Run: func(cmd *cobra.Command, args []string) {
 
@@ -54,13 +54,13 @@ var nsExistCmd = &cobra.Command{
 
 		login, err := svc.Login(GServer, GLogin)
 		if err != nil {
-			os.Stderr.WriteString("Login failed, " + err.Error())
+			_, _ = os.Stderr.WriteString("Login failed, " + err.Error())
 			return
 		}
 
 		exist, err := svc.NsExist(login, FNamespaceId)
 		if err != nil {
-			os.Stderr.WriteString("Check namespace failed, " + err.Error())
+			_, _ = os.Stderr.WriteString("Check namespace failed, " + err.Error())
 			return
 		}
 		fmt.Printf("%s\n", strconv.FormatBool(exist))

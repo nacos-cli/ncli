@@ -21,13 +21,13 @@ var FCfgFile string
 var cfgCmd = &cobra.Command{
 	Use:   "config",
 	Short: "manage config",
-	Long:  `add/update config.`,
+	Long:  `add/update Nacos config.`,
 }
 
 var cfgAddCmd = &cobra.Command{
 	Use:   "add",
 	Short: "add config",
-	Long:  `add config.`,
+	Long:  `add Nacos config.`,
 
 	Run: func(cmd *cobra.Command, args []string) {
 
@@ -73,7 +73,7 @@ var cfgAddCmd = &cobra.Command{
 var cfgGetCmd = &cobra.Command{
 	Use:   "get",
 	Short: "get config",
-	Long:  `get nacos config.`,
+	Long:  `get Nacos config.`,
 
 	Run: func(cmd *cobra.Command, args []string) {
 
