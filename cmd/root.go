@@ -31,7 +31,7 @@ var FVerbose bool
 var rootCmd = &cobra.Command{
 	Use:   "ncli",
 	Short: "ncli is a nacos cli client",
-	Long:  `ncli is a nacos cli client`,
+	Long:  "\n  ncli is a nacos cli client",
 }
 
 func parseServerFlag(cmd *cobra.Command) {
