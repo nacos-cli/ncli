@@ -38,7 +38,9 @@ func NsExist(login *LoginResult, namespaceId string) (bool, error) {
 	empty := ""
 	query.Set("namespaceId", empty)
 
-	resp, err := http.Get(url + "?" + query.Encode())
+	furl := url + "?" + query.Encode()
+	verboseFln("Namespace exist url: %s", furl)
+	resp, err := http.Get(furl)
 	if err != nil {
 		return false, errors.New("http get failed, caused by:" + err.Error())
 	}
@@ -52,6 +54,7 @@ func NsExist(login *LoginResult, namespaceId string) (bool, error) {
 			return false, errors.New("read response body error:" + err.Error())
 		}
 		body := string(bytes)
+		verboseFln("Namespace exist response: %s", body)
 		exist, err := strconv.ParseBool(body)
 		if err != nil {
 			return false, errors.New(fmt.Sprintf("decode response body %s failed, error: %s", body, err.Error()))
@@ -74,6 +77,9 @@ func create(login *LoginResult, namespaceId, namespaceName, description string) 
 	postBody.Set("namespaceName", namespaceName)
 	postBody.Set("namespaceDesc", description)
 
+	if GVerbose {
+		fmt.Printf("Namespace create url: %s, post:%+v, postData: %s\n", url, postBody, postBody.Encode())
+	}
 	resp, err := http.PostForm(url, postBody)
 	if err != nil {
 		return false, errors.New("http post failed, caused by:" + err.Error())
@@ -90,6 +96,7 @@ func create(login *LoginResult, namespaceId, namespaceName, description string) 
 		}
 
 		body := string(bytes)
+		verboseFln("Namespace create response: %s", body)
 		ok, err := strconv.ParseBool(body)
 		if err != nil {
 			return false, errors.New(fmt.Sprintf("decode response body %s failed, error: %s", body, err.Error()))

@@ -35,6 +35,7 @@ func Login(srv *Server, post *LoginPost) (*LoginResult, error) {
 	loginBody.Set("username", post.Username)
 	loginBody.Set("password", post.Password)
 
+	verboseFln("Login url:%s, username:%s, password:%s", url, post.Username, post.Password)
 	resp, err := http.PostForm(url, loginBody)
 	if err != nil {
 		return result, errors.New("http post failed, caused by:" + err.Error())
@@ -49,6 +50,7 @@ func Login(srv *Server, post *LoginPost) (*LoginResult, error) {
 		if err != nil {
 			return result, errors.New("read response body error:" + err.Error())
 		}
+		verboseFln("Login response:%s", string(bytes))
 
 		type jsonResult struct {
 			Token    string `json:"accessToken"`

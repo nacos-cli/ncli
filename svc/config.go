@@ -62,7 +62,7 @@ func ConfigGet(login *LoginResult, s *ConfigQuery) (*Config, error) {
 	cfg.NamespaceId = s.NamespaceId
 
 	furl := url + "?" + query.Encode()
-	verboseFln("url: %s", furl)
+	verboseFln("Config get url: %s", furl)
 	resp, err := http.Get(furl)
 	if err != nil {
 		return cfg, errors.New("http get failed, caused by:" + err.Error())
@@ -77,7 +77,7 @@ func ConfigGet(login *LoginResult, s *ConfigQuery) (*Config, error) {
 			return cfg, errors.New("read response body error:" + err.Error())
 		}
 
-		verboseFln("response: %s", string(bytes))
+		verboseFln("Config get response: %s", string(bytes))
 		err = json.Unmarshal(bytes, &cfg)
 		if err != nil {
 			return cfg, errors.New(fmt.Sprintf("decode response body %s failed, error: %s", string(bytes), err.Error()))
@@ -111,7 +111,7 @@ func ConfigCreateOrUpdate(login *LoginResult, p *ConfigPost) (bool, error) {
 		return false, errors.New("Automatically create namespace '" + p.NamespaceId + "' failed, caused by:" + err.Error())
 	}
 	if GVerbose {
-		fmt.Printf("url: %s, post:%+v, postData: %s\n", url, postBody, postBody.Encode())
+		fmt.Printf("Config post url: %s, post:%+v, postData: %s\n", url, postBody, postBody.Encode())
 	}
 
 	resp, err := http.PostForm(url, postBody)
@@ -130,7 +130,7 @@ func ConfigCreateOrUpdate(login *LoginResult, p *ConfigPost) (bool, error) {
 		}
 
 		body := string(bytes)
-		verboseFln("response: %s", body)
+		verboseFln("Config post response: %s", body)
 		ok, err := strconv.ParseBool(body)
 		if err != nil {
 			return false, errors.New(fmt.Sprintf("decode response body %s failed, error: %s", body, err.Error()))
