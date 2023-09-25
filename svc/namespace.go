@@ -9,9 +9,9 @@ import (
 	"strconv"
 )
 
-func Create(login *LoginResult, namespaceId, namespaceName, description string) (bool, error) {
+func NsCreate(login *LoginResult, namespaceId, namespaceName, description string) (bool, error) {
 
-	exist, err := Exist(login, namespaceId)
+	exist, err := NsExist(login, namespaceId)
 	if err != nil {
 		return false, err
 	}
@@ -27,7 +27,7 @@ func Create(login *LoginResult, namespaceId, namespaceName, description string) 
 
 }
 
-func Exist(login *LoginResult, namespaceId string) (bool, error) {
+func NsExist(login *LoginResult, namespaceId string) (bool, error) {
 
 	const path = "/v1/console/namespaces"
 	url := login.Server.url() + path

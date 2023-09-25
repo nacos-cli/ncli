@@ -33,7 +33,7 @@ var nsAddCmd = &cobra.Command{
 			return
 		}
 
-		_, err = svc.Create(login, FNamespaceId, FNamespaceName, FNamespaceDesc)
+		_, err = svc.NsCreate(login, FNamespaceId, FNamespaceName, FNamespaceDesc)
 		if err != nil {
 			os.Stderr.WriteString("Create namespace failed, " + err.Error())
 			return
@@ -58,7 +58,7 @@ var nsExistCmd = &cobra.Command{
 			return
 		}
 
-		exist, err := svc.Exist(login, FNamespaceId)
+		exist, err := svc.NsExist(login, FNamespaceId)
 		if err != nil {
 			os.Stderr.WriteString("Check namespace failed, " + err.Error())
 			return
