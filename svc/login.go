@@ -39,7 +39,9 @@ func Login(srv *Server, post *LoginPost) (*LoginResult, error) {
 	if err != nil {
 		return result, errors.New("http post failed, caused by:" + err.Error())
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(resp.Body)
 
 	if resp.StatusCode == http.StatusOK {
 

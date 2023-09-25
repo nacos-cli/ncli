@@ -42,7 +42,9 @@ func NsExist(login *LoginResult, namespaceId string) (bool, error) {
 	if err != nil {
 		return false, errors.New("http get failed, caused by:" + err.Error())
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(resp.Body)
 
 	if resp.StatusCode == http.StatusOK {
 		bytes, err := io.ReadAll(resp.Body)
@@ -76,7 +78,9 @@ func create(login *LoginResult, namespaceId, namespaceName, description string) 
 	if err != nil {
 		return false, errors.New("http post failed, caused by:" + err.Error())
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(resp.Body)
 
 	if resp.StatusCode == http.StatusOK {
 
