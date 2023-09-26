@@ -55,7 +55,7 @@ var cfgAddCmd = &cobra.Command{
 				_, _ = os.Stderr.WriteString("Read config from file failed, " + err.Error())
 				return
 			}
-			if len(ext) > 0 {
+			if cfg.Type == "" && len(ext) > 0 {
 				cfg.Type = ext
 			}
 			cfg.Content = cont
