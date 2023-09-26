@@ -10,7 +10,7 @@ import (
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Show the current version",
-	Long:  `Show the current version.`,
+	Long:  "\n  Show the current version.",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(AppName, AppVersion)
 	},

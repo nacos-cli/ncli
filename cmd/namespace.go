@@ -12,7 +12,7 @@ import (
 var nsCmd = &cobra.Command{
 	Use:   "namespace",
 	Short: "manage namespace",
-	Long:  `manage Nacos namespace.`,
+	Long:  "\n  Manage Nacos namespace.",
 }
 
 var FNamespaceName string
@@ -21,7 +21,7 @@ var FNamespaceDesc string
 var nsAddCmd = &cobra.Command{
 	Use:   "add",
 	Short: "add Nacos namespace",
-	Long:  `add Nacos namespace.`,
+	Long:  "\n  Add Nacos namespace.",
 
 	Run: func(cmd *cobra.Command, args []string) {
 
@@ -46,7 +46,7 @@ var nsAddCmd = &cobra.Command{
 var nsExistCmd = &cobra.Command{
 	Use:   "exist",
 	Short: "check namespace",
-	Long:  `check Nacos namespace for existence.`,
+	Long:  "\n  Check Nacos namespace for existence.",
 
 	Run: func(cmd *cobra.Command, args []string) {
 
