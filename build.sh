@@ -3,7 +3,8 @@
 cd build
 
 cp ../LICENSE ./
-cp ../README.md ./README
+pandoc -o README.html ../README.md
+pandoc -o README.pdf ../README.md
 
 dir="upload"
 list=$(go tool dist list|grep -E 'linux|bsd|darwin|windows|dragon' |grep -E 'arm|amd')
@@ -15,11 +16,11 @@ do
   file="ncli_${os}_${arch}"
 	if test "$os" = "windows";then
 	  env GOOS=$os GOARCH=$arch go build -o "${file}.exe" ..
-	  zip -j -r "${dir}/${file}.zip" "${file}.exe" LICENSE README
+	  zip -j -r "${dir}/${file}.zip" "${file}.exe" LICENSE README.html README.pdf
 	else
 	  env GOOS=$os GOARCH=$arch go build -o "${file}" ..
 	  chmod a+x "$file"
-	  tar czvf "${dir}/${file}.tar.gz" "$file" "LICENSE" "README"
+	  tar czvf "${dir}/${file}.tar.gz" "$file" LICENSE README.html README.pdf
   fi
 done
 
