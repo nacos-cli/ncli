@@ -6,6 +6,6 @@ var GVerbose bool
 
 func verboseFln(format string, a ...any) {
 	if GVerbose {
-		_, _ = fmt.Printf(format+"\n", a)
+		_, _ = fmt.Printf(format+"\n", a...)
 	}
 }
