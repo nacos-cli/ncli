@@ -9,7 +9,7 @@ import (
 
 const (
 	AppName    = "ncli"
-	AppVersion = "0.1.1"
+	AppVersion = "0.1.3"
 )
 
 var GServer = new(svc.Server)
